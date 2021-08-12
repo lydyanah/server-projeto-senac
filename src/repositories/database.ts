@@ -8,6 +8,14 @@ const SQL_ITENS_CREATE = `
 		nome TEXT,
 		descricao TEXT
 	)`
+	const SQL_USER_CREATE = `
+	CREATE TABLE user (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		nome TEXT,
+		email TEXT,
+		descricao TEXT
+	)`	
+
 
 const database = new sqlite3.Database(DBSOURCE, (err) => {
 	if (err) {

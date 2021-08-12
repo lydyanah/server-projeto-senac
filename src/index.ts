@@ -1,5 +1,6 @@
 import express from 'express'
 import itensRouter from './routers/itens-router'
+import usersRouter from './routers/users-router'
 
 // Porta do servidor
 const PORT = process.env.PORT || 4000
@@ -20,7 +21,7 @@ app.get('/', (req, res) => {
 })
 
 // Rotas
-app.use('/api', itensRouter)
+app.use('/api', itensRouter,usersRouter)
 
 // Resposta padrão para quaisquer outras requisições:
 app.use((req, res) => {

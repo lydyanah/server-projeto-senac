@@ -4,7 +4,7 @@ import database from './database'
 const itensRepository = {
 	criar: (item: Item, callback: (id?: number) => void) => {
 		const sql = 'INSERT INTO itens (nome, descricao) VALUES (?, ?)'
-		const params = [item.nome, item.descricao]
+		const params = [item.nome, item.descricao,item.categoria]
 		database.run(sql, params, function(_err) {
 			callback(this?.lastID)
 		})
