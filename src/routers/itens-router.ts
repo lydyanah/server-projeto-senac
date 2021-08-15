@@ -16,6 +16,8 @@ itensRouter.post('/itens', (req, res) => {
 })
 
 itensRouter.get('/itens', (req, res) => {
+	
+	
 	itensRepository.lerTodos((itens) => res.json(itens))
 })
 
