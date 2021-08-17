@@ -20,9 +20,9 @@ const SQL_USUARIOS_INSERT = `
 	`
 
 const SQL_MALAS_CREATE = `
-	CREATE TABLE itens (
+	CREATE TABLE malas (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		nome TEXT,
+		titulo TEXT,
 		descricao TEXT
 	)`
 

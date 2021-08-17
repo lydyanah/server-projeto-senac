@@ -1,9 +1,7 @@
 type Mala =  {
-	idMala: number
-	idUsuario: string
-	idItem: string
+	id?: number
 	titulo: string
-    descricaoMala:string
+    descricao:string
 }
 
 

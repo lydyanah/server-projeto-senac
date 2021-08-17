@@ -21,8 +21,8 @@ malasRouter.get('/malas', (req, res) => {
 	malasRepository.lerTodos((malas) => res.json(malas))
 })
 
-malasRouter.get('/malas/:idMala', (req, res) => {
-	const id: number = +req.params.idMala
+malasRouter.get('/malas/:id', (req, res) => {
+	const id: number = +req.params.id
 	malasRepository.ler(id, (mala) => {
 		if (mala) {
 			res.json(mala)
@@ -33,8 +33,8 @@ malasRouter.get('/malas/:idMala', (req, res) => {
 })
 
 malasRouter.put('/malas/:idMala', (req, res) => {
-	const id: number = +req.params.idMala
-	malasRepository.atualizar(id, req.body, (notFound) => {
+	const idMala: number = +req.params.idMala
+	malasRepository.atualizar(idMala, req.body, (notFound) => {
 		if (notFound) {
 			res.status(404).send()
 		} else {
@@ -43,8 +43,8 @@ malasRouter.put('/malas/:idMala', (req, res) => {
 	})
 })
 
-malasRouter.delete('/malas/:idMala', (req, res) => {
-	const id: number = +req.params.idMala
+malasRouter.delete('/malas/:id', (req, res) => {
+	const id: number = +req.params.id
 	malasRepository.apagar(id, (notFound) => {
         if (notFound) {
             res.status(404).send()
