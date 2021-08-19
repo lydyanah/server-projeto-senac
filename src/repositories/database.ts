@@ -6,6 +6,7 @@ const SQL_ITENS_CREATE = `
 	CREATE TABLE itens (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		nome TEXT,
+		categoria, TEXT,
 		descricao TEXT
 	)`
 const SQL_USUARIOS_CREATE = `
@@ -14,7 +15,7 @@ const SQL_USUARIOS_CREATE = `
 		nomeUsuario TEXT,
 		senha TEXT,
 		primeiroNome TEXT,
-		genero TEXT
+		
 	)
 	`
 const SQL_USUARIOS_INSERT = `
