@@ -1,5 +1,6 @@
 import express from 'express'
 import itensRouter from './routers/itens-router'
+import cors from 'cors'
 import loginRouter from './routers/login-router'
 import malasRouter from './routers/malas-router'
 
@@ -22,6 +23,11 @@ app.use(express.urlencoded({ extended: true }))
 app.get('/', (req, res) => {
 	res.send('Bem-vindo!')
 })
+
+// Cors
+app.use(cors({
+    origin: ['http://localhost:3000']
+}))
 
 // Rotas
 app.use('/api', itensRouter,)
