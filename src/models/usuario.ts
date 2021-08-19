@@ -1,12 +1,9 @@
 type Usuario =  {
 	id: number
 	nomeUsuario: string
+	primeiroNome: string
 	senha: string
-    primeiroNome:string
+   
 }
-
-
-
-
 
 export default Usuario

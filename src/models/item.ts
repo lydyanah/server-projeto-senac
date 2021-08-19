@@ -3,6 +3,7 @@ type Item = {
 	nome: string
 	categoria:string
 	descricao: string
+	
 }
 
 export default Item

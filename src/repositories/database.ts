@@ -12,7 +12,9 @@ const SQL_USUARIOS_CREATE = `
 	CREATE TABLE usuarios (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		nomeUsuario TEXT,
-		senha TEXT
+		senha TEXT,
+		primeiroNome TEXT,
+		genero TEXT
 	)
 	`
 const SQL_USUARIOS_INSERT = `
