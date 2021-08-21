@@ -33,8 +33,8 @@ itensRouter.get('/itens/:id', (req, res) => {
 })
 
 itensRouter.put('/itens/:id', (req, res) => {
-	const id: number = +req.params.id
-	itensRepository.atualizar(id, req.body, (notFound) => {
+	const idItem: number = +req.params.id
+	itensRepository.atualizar(idItem, req.body, (notFound) => {
 		if (notFound) {
 			res.status(404).send()
 		} else {

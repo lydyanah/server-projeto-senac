@@ -4,22 +4,29 @@ const DBSOURCE = 'db.sqlite'
 
 const SQL_ITENS_CREATE = `
 	CREATE TABLE itens (
-		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		idItem INTEGER PRIMARY KEY AUTOINCREMENT,
 		nome TEXT,
-		categoria, TEXT,
-		descricao TEXT
+		categoria TEXT,
+		descricao TEXT,
+		subcategoria TEXT,
+		tamanho TEXT,
+		cor TEXT,
+		marca TEXT
 	)`
 const SQL_USUARIOS_CREATE = `
 	CREATE TABLE usuarios (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		nomeUsuario TEXT,
-		senha TEXT,
 		primeiroNome TEXT,
+		sobreNome TEXT,
+		dataNascimento TEXT,
+		senha TEXT,
+		email TEXT
 		
 	)
 	`
 const SQL_USUARIOS_INSERT = `
-	INSERT INTO usuarios (nomeUsuario, senha, primeiroNome) VALUES ("adm", "123", "Administrador");
+	INSERT INTO usuarios (nomeUsuario, primeiroNome, sobreNome , dataNascimento , senha, genero , email) VALUES ("adm", "Administrador", "Beta", "12 de fevereiro de 2005", "123", "masculino", "administrador@adm.com");
 	`
 
 const SQL_MALAS_CREATE = `
