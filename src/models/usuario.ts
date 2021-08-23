@@ -1,5 +1,5 @@
 type Usuario =  {
-	id: number
+	idUsuario: number
 	nomeUsuario: string
 	primeiroNome: string
 	sobreNome: string

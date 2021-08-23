@@ -2,9 +2,9 @@ import Mala from '../models/mala'
 import database from './database'
 
 const malasRepository = {
-	criar: (mala: Mala, callback: (id?: number) => void) => {
-		const sql = 'INSERT INTO Malas (idUsuario, idItem, titulo, descricao,) VALUES (?, ?)'
-		const params = [mala.titulo, mala.descricao]
+	criar: (mala: Mala, callback: (idMala?: number) => void) => {
+		const sql = 'INSERT INTO Malas (tituloMala, descricaoMala,) VALUES (?, ?)'
+		const params = [mala.tituloMala, mala.descricaoMala]
 		database.run(sql, params, function(_err) {
 			callback(this?.lastID)
 		})
@@ -24,7 +24,7 @@ const malasRepository = {
 
 	atualizar: (idMala: number, mala: Mala, callback: (notFound: boolean) => void) => {
 		const sql = 'UPDATE malas SET titulo = ?, descricao = ? WHERE idMala = ?'
-		const params = [mala.titulo, mala.descricao, idMala]
+		const params = [mala.tituloMala, mala.descricaoMala, idMala]
 		database.run(sql, params, function(_err) {
 			callback(this.changes === 0)
 		})

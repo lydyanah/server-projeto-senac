@@ -31,11 +31,19 @@ const SQL_USUARIOS_INSERT = `
 
 const SQL_MALAS_CREATE = `
 	CREATE TABLE malas (
-		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		idMala INTEGER PRIMARY KEY AUTOINCREMENT,
 		titulo TEXT,
-		descricao TEXT
+		descricaoMala TEXT
 	)`
 
+	const SQL_LOOKS_CREATE = `
+	CREATE TABLE looks (
+		idLook INTEGER PRIMARY KEY AUTOINCREMENT,
+		descricaoLook TEXT,
+		estacaoLook TEXT,
+		ocasioesLook TEXT
+		
+	)`
 
 const database = new sqlite3.Database(DBSOURCE, (err) => {
 	if (err) {
@@ -67,14 +75,23 @@ const database = new sqlite3.Database(DBSOURCE, (err) => {
 		})
 	}
 })
-			database.run(SQL_MALAS_CREATE, (err) => {
-				if (err) {
-			// Possivelmente a tabela já foi criada
-			} else {
-				console.log('Tabela malas criada com sucesso.')
+database.run(SQL_MALAS_CREATE, (err) => {
+	if (err) {
+		// Possivelmente a tabela já foi criada
+	} else {
+		console.log('Tabela malas criada com sucesso.')
+	}
+})
+
+database.run(SQL_LOOKS_CREATE, (err) => {
+	if (err) {
+		// Possivelmente a tabela já foi criada
+	} else {
+		console.log('Tabela looks criada com sucesso.')
 	}
 })
 
 
 
-export default database
+
+	export default database

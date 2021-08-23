@@ -3,6 +3,7 @@ import itensRouter from './routers/itens-router'
 import cors from 'cors'
 import loginRouter from './routers/login-router'
 import malasRouter from './routers/malas-router'
+import looksRouter from './routers/looks-router'
 
 
 
@@ -33,6 +34,7 @@ app.use(cors({
 app.use('/api', itensRouter,)
 app.use('/api', loginRouter)
 app.use('/api', malasRouter)
+app.use('/api', looksRouter)
 
 // Resposta padrão para quaisquer outras requisições:
 app.use((req, res) => {
