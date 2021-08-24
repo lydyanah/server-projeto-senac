@@ -2,7 +2,7 @@ import Item from '../models/item'
 import database from './database'
 
 const itensRepository = {
-	criar: (item: Item, callback: (idItem?: number) => void) => {
+	criar: (item: Item, callback: (id?: number) => void) => {
 		const sql = 'INSERT INTO itens (nome, descricao, categoria, subcategoria, tamanho, cor, marca) VALUES (?, ?, ?, ?, ?, ?, ?)'
 		const params = [item.nome, item.descricao, item.categoria, item.subcategoria, item.tamanho, item.cor, item.marca]
 		database.run(sql, params, function(_err) {
@@ -16,23 +16,23 @@ const itensRepository = {
 		database.all(sql, params, (_err, rows) => callback(rows))
 	},
 
-	ler: (idItem: number, callback: (item?: Item) => void) => {
+	ler: (id: number, callback: (item?: Item) => void) => {
 		const sql = 'SELECT * FROM itens WHERE idItem = ?'
-		const params = [idItem]
+		const params = [id]
 		database.get(sql, params, (_err, row) => callback(row))
 	},
 
-	atualizar: (idItem: number, item: Item, callback: (notFound: boolean) => void) => {
-		const sql = 'UPDATE itens SET nome = ?, descricao = ? WHERE idItem = ?'
-		const params = [item.nome, item.descricao, idItem]
+	atualizar: (id: number, item: Item, callback: (notFound: boolean) => void) => {
+		const sql = 'UPDATE itens SET nome = ?, descricao = ? WHERE id = ?'
+		const params = [item.nome, item.descricao, id]
 		database.run(sql, params, function(_err) {
 			callback(this.changes === 0)
 		})
 	},
 
-	apagar: (idItem: number, callback: (notFound: boolean) => void) => {
-		const sql = 'DELETE FROM itens WHERE idItem = ?'
-		const params = [idItem]
+	apagar: (id: number, callback: (notFound: boolean) => void) => {
+		const sql = 'DELETE FROM itens WHERE id = ?'
+		const params = [id]
 		database.run(sql, params, function(_err) {
 			callback(this.changes === 0)
 		})

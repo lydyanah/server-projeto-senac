@@ -1,5 +1,5 @@
 type Mala =  {
-	idMala?: number
+	id?: number
 	tituloMala: string
     descricaoMala:string
 	

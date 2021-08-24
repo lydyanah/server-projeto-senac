@@ -1,5 +1,5 @@
 type Item = {
-	idItem?: number
+	id?: number
 	nome: string
 	categoria: string
 	subcategoria: string

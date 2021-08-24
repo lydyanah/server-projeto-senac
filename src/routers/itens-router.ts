@@ -6,9 +6,9 @@ const itensRouter = express.Router()
 
 itensRouter.post('/itens', (req, res) => {
 	const item: Item = req.body
-	itensRepository.criar(item, (idItem) => {
-        if (idItem) {
-            res.status(201).location(`/itens/${idItem}`).send()
+	itensRepository.criar(item, (id) => {
+        if (id) {
+            res.status(201).location(`/itens/${id}`).send()
         } else {
             res.status(400).send()
         }
@@ -21,9 +21,9 @@ itensRouter.get('/itens', (req, res) => {
 	itensRepository.lerTodos((itens) => res.json(itens))
 })
 
-itensRouter.get('/itens/:idItem', (req, res) => {
-	const idItem: number = +req.params.idItem
-	itensRepository.ler(idItem, (item) => {
+itensRouter.get('/itens/:id', (req, res) => {
+	const id: number = +req.params.id
+	itensRepository.ler(id, (item) => {
 		if (item) {
 			res.json(item)
 		} else {
@@ -32,9 +32,9 @@ itensRouter.get('/itens/:idItem', (req, res) => {
 	})
 })
 
-itensRouter.put('/itens/:idItem', (req, res) => {
-	const idItem: number = +req.params.idItem
-	itensRepository.atualizar(idItem, req.body, (notFound) => {
+itensRouter.put('/itens/:id', (req, res) => {
+	const id: number = +req.params.id
+	itensRepository.atualizar(id, req.body, (notFound) => {
 		if (notFound) {
 			res.status(404).send()
 		} else {
@@ -43,9 +43,9 @@ itensRouter.put('/itens/:idItem', (req, res) => {
 	})
 })
 
-itensRouter.delete('/itens/:idItem', (req, res) => {
-	const idItem: number = +req.params.idItem
-	itensRepository.apagar(idItem, (notFound) => {
+itensRouter.delete('/itens/:id', (req, res) => {
+	const id: number = +req.params.id
+	itensRepository.apagar(id, (notFound) => {
         if (notFound) {
             res.status(404).send()
         } else {

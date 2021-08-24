@@ -1,5 +1,5 @@
 type Look = {
-    idLook?: number
+    id?: number
     descricaoLook: string
     estacaoLook: string
     ocasioesLook: string

@@ -6,9 +6,9 @@ const looksRouter = express.Router()
 
 looksRouter.post('/looks', (req, res) => {
 	const look: Look = req.body
-	looksRepository.criar(look, (idLook) => {
-        if (idLook) {
-            res.status(201).location(`/looks/${idLook}`).send()
+	looksRepository.criar(look, (id) => {
+        if (id) {
+            res.status(201).location(`/looks/${id}`).send()
         } else {
             res.status(400).send()
         }
@@ -21,9 +21,9 @@ looksRouter.get('/looks', (req, res) => {
 	looksRepository.lerTodos((looks) => res.json(looks))
 })
 
-looksRouter.get('/looks/:idLook', (req, res) => {
-	const idLook: number = +req.params.idLook
-	looksRepository.ler(idLook, (look) => {
+looksRouter.get('/looks/:id', (req, res) => {
+	const id: number = +req.params.id
+	looksRepository.ler(id, (look) => {
 		if (look) {
 			res.json(look)
 		} else {
@@ -32,9 +32,9 @@ looksRouter.get('/looks/:idLook', (req, res) => {
 	})
 })
 
-looksRouter.put('/looks/:idLook', (req, res) => {
-	const idLook: number = +req.params.idLook
-	looksRepository.atualizar(idLook, req.body, (notFound) => {
+looksRouter.put('/looks/:id', (req, res) => {
+	const id: number = +req.params.id
+	looksRepository.atualizar(id, req.body, (notFound) => {
 		if (notFound) {
 			res.status(404).send()
 		} else {
@@ -43,9 +43,9 @@ looksRouter.put('/looks/:idLook', (req, res) => {
 	})
 })
 
-looksRouter.delete('/looks/:idLook', (req, res) => {
-	const idLook: number = +req.params.idLook
-	looksRepository.apagar(idLook, (notFound) => {
+looksRouter.delete('/looks/:id', (req, res) => {
+	const id: number = +req.params.id
+	looksRepository.apagar(id, (notFound) => {
         if (notFound) {
             res.status(404).send()
         } else {

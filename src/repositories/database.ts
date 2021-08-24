@@ -4,7 +4,7 @@ const DBSOURCE = 'db.sqlite'
 
 const SQL_ITENS_CREATE = `
 	CREATE TABLE itens (
-		idItem INTEGER PRIMARY KEY AUTOINCREMENT,
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		nome TEXT,
 		categoria TEXT,
 		descricao TEXT,
@@ -31,14 +31,14 @@ const SQL_USUARIOS_INSERT = `
 
 const SQL_MALAS_CREATE = `
 	CREATE TABLE malas (
-		idMala INTEGER PRIMARY KEY AUTOINCREMENT,
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		titulo TEXT,
 		descricaoMala TEXT
 	)`
 
 	const SQL_LOOKS_CREATE = `
 	CREATE TABLE looks (
-		idLook INTEGER PRIMARY KEY AUTOINCREMENT,
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		descricaoLook TEXT,
 		estacaoLook TEXT,
 		ocasioesLook TEXT

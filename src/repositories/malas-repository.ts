@@ -2,7 +2,7 @@ import Mala from '../models/mala'
 import database from './database'
 
 const malasRepository = {
-	criar: (mala: Mala, callback: (idMala?: number) => void) => {
+	criar: (mala: Mala, callback: (id?: number) => void) => {
 		const sql = 'INSERT INTO Malas (tituloMala, descricaoMala,) VALUES (?, ?)'
 		const params = [mala.tituloMala, mala.descricaoMala]
 		database.run(sql, params, function(_err) {
@@ -16,23 +16,23 @@ const malasRepository = {
 		database.all(sql, params, (_err, rows) => callback(rows))
 	},
 
-	ler: (idMala: number, callback: (mala?: Mala) => void) => {
+	ler: (id: number, callback: (mala?: Mala) => void) => {
 		const sql = 'SELECT * FROM malas WHERE idMala = ?'
-		const params = [idMala]
+		const params = [id]
 		database.get(sql, params, (_err, row) => callback(row))
 	},
 
-	atualizar: (idMala: number, mala: Mala, callback: (notFound: boolean) => void) => {
-		const sql = 'UPDATE malas SET titulo = ?, descricao = ? WHERE idMala = ?'
-		const params = [mala.tituloMala, mala.descricaoMala, idMala]
+	atualizar: (id: number, mala: Mala, callback: (notFound: boolean) => void) => {
+		const sql = 'UPDATE malas SET titulo = ?, descricao = ? WHERE id = ?'
+		const params = [mala.tituloMala, mala.descricaoMala, id]
 		database.run(sql, params, function(_err) {
 			callback(this.changes === 0)
 		})
 	},
 
-	apagar: (idMala: number, callback: (notFound: boolean) => void) => {
-		const sql = 'DELETE FROM malas WHERE idMala = ?'
-		const params = [idMala]
+	apagar: (id: number, callback: (notFound: boolean) => void) => {
+		const sql = 'DELETE FROM malas WHERE id = ?'
+		const params = [id]
 		database.run(sql, params, function(_err) {
 			callback(this.changes === 0)
 		})

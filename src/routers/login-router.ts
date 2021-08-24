@@ -12,7 +12,7 @@ loginRouter.post('/login', (req,res) => {
 			if (usuarioEncontrado.senha === 
 			usuarioProcurado.senha) {
 				res.json({
-					token: `${usuarioEncontrado.idUsuario}:$
+					token: `${usuarioEncontrado.id}:$
 					{usuarioEncontrado.nomeUsuario}`
 				})
 			} else {
