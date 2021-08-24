@@ -7,6 +7,7 @@ type Item = {
 	tamanho: string
 	cor: string
 	marca: string
+	lookId: number
 }
 
 export default Item

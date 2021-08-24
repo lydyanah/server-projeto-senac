@@ -1,5 +1,7 @@
 import express from 'express'
+import Item from '../models/item'
 import Look from '../models/look'
+import itensRepository from '../repositories/itens-repository'
 import looksRepository from '../repositories/looks-repository'
 
 const looksRouter = express.Router()
@@ -16,8 +18,7 @@ looksRouter.post('/looks', (req, res) => {
 })
 
 looksRouter.get('/looks', (req, res) => {
-	
-	
+
 	looksRepository.lerTodos((looks) => res.json(looks))
 })
 
@@ -53,5 +54,27 @@ looksRouter.delete('/looks/:id', (req, res) => {
         }
     })
 })
+
+looksRouter.post('/looks/:id/itens', (req, res) => {
+	const item: Item = {...req.body, ...{
+		lookId: req.params.id
+	}}
+	itensRepository.criar(item, (id) => {
+        if (id) {
+            res.status(201).location(`/itens/${id}`).send()
+        } else {
+            res.status(400).send()
+        }
+    })
+})
+
+looksRouter.get('/looks/:id/itens', (req, res) => {
+	const id: number = +req.params.id
+	itensRepository.lerTodosDoLook(id, (looks) => res.json(looks))
+})	
+
+
+
+
 
 export default looksRouter

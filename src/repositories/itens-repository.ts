@@ -3,9 +3,10 @@ import database from './database'
 
 const itensRepository = {
 	criar: (item: Item, callback: (id?: number) => void) => {
-		const sql = 'INSERT INTO itens (nome, descricao, categoria, subcategoria, tamanho, cor, marca) VALUES (?, ?, ?, ?, ?, ?, ?)'
-		const params = [item.nome, item.descricao, item.categoria, item.subcategoria, item.tamanho, item.cor, item.marca]
+		const sql = 'INSERT INTO itens (nome, descricao, categoria, subcategoria, tamanho, cor, marca, lookId) VALUES (?, ?, ?, ?, ?, ?, ?, ?)'
+		const params = [item.nome, item.descricao, item.categoria, item.subcategoria, item.tamanho, item.cor, item.marca, item.lookId]
 		database.run(sql, params, function(_err) {
+			console.error(_err)
 			callback(this?.lastID)
 		})
 	},
@@ -16,13 +17,31 @@ const itensRepository = {
 		database.all(sql, params, (_err, rows) => callback(rows))
 	},
 
+	lerTodosDoLook: (lookId:number,callback: (itens:Item[]) => void) => {
+		const sql = 'SELECT * FROM itens WHERE lookId = ?'
+		const params: any[] = [lookId]
+		database.all(sql, params, (_err, rows) => callback(rows))
+	},
+
+	apagarDoLook: (lookId: number, callback: (notFound: boolean) => void) => {
+		const sql = 'DELETE FROM itens WHERE lookId = ?'
+		const params = [lookId]
+		database.run(sql, params, function(_err) {
+			callback(this.changes === 0)
+		})
+	},
+
+
+
 	ler: (id: number, callback: (item?: Item) => void) => {
-		const sql = 'SELECT * FROM itens WHERE idItem = ?'
+		const sql = 'SELECT * FROM itens WHERE id = ?'
 		const params = [id]
 		database.get(sql, params, (_err, row) => callback(row))
 	},
 
 	atualizar: (id: number, item: Item, callback: (notFound: boolean) => void) => {
+		
+
 		const sql = 'UPDATE itens SET nome = ?, descricao = ? WHERE id = ?'
 		const params = [item.nome, item.descricao, id]
 		database.run(sql, params, function(_err) {
@@ -38,5 +57,10 @@ const itensRepository = {
 		})
 	},
 }
+	
+
+
+
+	
 
 export default itensRepository

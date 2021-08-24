@@ -1,9 +1,10 @@
 import Look from '../models/look'
 import database from './database'
+import itensRepository from './itens-repository'
 
 const looksRepository = {
 	criar: (look: Look, callback: (id?: number) => void) => {
-		const sql = 'INSERT INTO looks ( descricaoLook, estacaoLook, ocasioesLook) VALUES (?, ?, ?)'
+		const sql = 'INSERT INTO looks ( descricaoLook, estacaoLook, ocasioesLook,) VALUES (?, ?, ?)'
 		const params = [look.descricaoLook, look.estacaoLook, look.ocasioesLook]
 		database.run(sql, params, function(_err) {
 			callback(this?.lastID)
@@ -30,11 +31,13 @@ const looksRepository = {
 		})
 	},
 
-	apagar: (id: number, callback: (notFound: boolean) => void) => {
-		const sql = 'DELETE FROM looks WHERE id = ?'
-		const params = [id]
-		database.run(sql, params, function(_err) {
-			callback(this.changes === 0)
+		apagar: (id: number, callback: (notFound: boolean) => void) => {
+			itensRepository.apagarDoLook(id, () => {
+			const sql = 'SELECT FROM looks WHERE id = ?'
+			const params = [id]
+			database.run(sql, params, function(_err) {
+				callback(this.changes === 0)
+			})
 		})
 	},
 }

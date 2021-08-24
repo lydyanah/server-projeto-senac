@@ -5,23 +5,26 @@ const DBSOURCE = 'db.sqlite'
 const SQL_ITENS_CREATE = `
 	CREATE TABLE itens (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		nome TEXT,
-		categoria TEXT,
-		descricao TEXT,
-		subcategoria TEXT,
-		tamanho TEXT,
-		cor TEXT,
-		marca TEXT
+		nome TEXT NOT NULL,
+		categoria TEXT NOT NULL,
+		descricao TEXT NOT NULL,
+		subcategoria TEXT NOT NULL, 
+		tamanho TEXT NOT NULL,
+		cor TEXT NOT NULL,
+		marca TEXT NOT NULL,
+		lookId INTERGER NOT NULL,
+		FOREIGN KEY(lookId) REFERENCES look(id)
 	)`
+
 const SQL_USUARIOS_CREATE = `
 	CREATE TABLE usuarios (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		nomeUsuario TEXT,
-		primeiroNome TEXT,
-		sobreNome TEXT,
-		dataNascimento TEXT,
-		senha TEXT,
-		email TEXT
+		nomeUsuario TEXT NOT NULL,
+		primeiroNome TEXT NOT NULL,
+		sobreNome TEXT NOT NULL,
+		dataNascimento TEXT NOT NULL,
+		senha TEXT NOT NULL,
+		email TEXT NOT NULL
 		
 	)
 	`
@@ -32,16 +35,16 @@ const SQL_USUARIOS_INSERT = `
 const SQL_MALAS_CREATE = `
 	CREATE TABLE malas (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		titulo TEXT,
-		descricaoMala TEXT
+		titulo TEXT NOT NULL,
+		descricaoMala TEXT NOT NULL
 	)`
 
 	const SQL_LOOKS_CREATE = `
 	CREATE TABLE looks (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		descricaoLook TEXT,
-		estacaoLook TEXT,
-		ocasioesLook TEXT
+		descricaoLook TEXT NOT NULL,
+		estacaoLook TEXT NOT NULL,
+		ocasioesLook TEXT NOT NULL
 		
 	)`
 
