@@ -1,9 +1,10 @@
+import Item from "./item"
+
 type Look = {
     id?: number
     descricaoLook: string
-    estacaoLook: string
-    ocasioesLook: string
     tagsLook: string
+    item: Item[]
 
 }
 export default Look

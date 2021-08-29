@@ -5,15 +5,20 @@ const DBSOURCE = 'db.sqlite'
 const SQL_ITENS_CREATE = `
 	CREATE TABLE itens (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		nome TEXT NOT NULL,
 		categoria TEXT NOT NULL,
-		descricao TEXT NOT NULL,
 		subcategoria TEXT NOT NULL, 
 		tamanho TEXT NOT NULL,
 		cor TEXT NOT NULL,
 		marca TEXT NOT NULL,
-		lookId INTERGER NOT NULL,
-		FOREIGN KEY(lookId) REFERENCES look(id)
+		material TEXT NOT NULL,
+		cuidados TEXT NOT NULL,
+		preco TEXT NOT NULL,
+		dataCompra TEXT NOT NULL,
+		status TEXT NOT NULL,
+		estacaoLook TEXT NOT NULL,
+		ocasioesLook TEXT NOT NULL,
+		notasItem TEXT NOT NULL,
+		tagsItem TEXT NOT NULL
 	)`
 
 const SQL_USUARIOS_CREATE = `
@@ -22,20 +27,19 @@ const SQL_USUARIOS_CREATE = `
 		nomeUsuario TEXT NOT NULL,
 		primeiroNome TEXT NOT NULL,
 		sobreNome TEXT NOT NULL,
-		dataNascimento TEXT NOT NULL,
 		senha TEXT NOT NULL,
-		email TEXT NOT NULL
+		email TEXT NOT NULL UNIQUE
 		
 	)
 	`
 const SQL_USUARIOS_INSERT = `
-	INSERT INTO usuarios (nomeUsuario, primeiroNome, sobreNome , dataNascimento , senha, genero , email) VALUES ("adm", "Administrador", "Beta", "12 de fevereiro de 2005", "123", "masculino", "administrador@adm.com");
+	INSERT INTO usuarios (nomeUsuario, primeiroNome, sobreNome , senha ,email) VALUES ("adm", "Administrador", "Beta","123","administrador@adm.com");
 	`
 
 const SQL_MALAS_CREATE = `
 	CREATE TABLE malas (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		titulo TEXT NOT NULL,
+		tituloMala TEXT NOT NULL,
 		descricaoMala TEXT NOT NULL
 	)`
 
@@ -43,10 +47,27 @@ const SQL_MALAS_CREATE = `
 	CREATE TABLE looks (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		descricaoLook TEXT NOT NULL,
-		estacaoLook TEXT NOT NULL,
-		ocasioesLook TEXT NOT NULL
+		tagsLook TEXT NOT NULL
+		
 		
 	)`
+	const SQL_LOOKS_ITEM_CREATE = `
+	CREATE TABLE looks_item (
+		lookId INTERGER NOT NULL,
+		itemId INTERGER NOT NULL,
+		FOREIGN KEY(lookId) REFERENCES look(id),
+		FOREIGN KEY(itemId)	REFERENCES item(id)
+		)`
+
+	const SQL_MALAS_ITEM_CREATE = `
+	CREATE TABLE malas_item (
+		malaId INTERGER NOT NULL,
+		itemId INTERGER NOT NULL,
+		FOREIGN KEY(malaId) REFERENCES mala(id),
+		FOREIGN KEY(itemId)	REFERENCES item(id)
+		)`
+
+
 
 const database = new sqlite3.Database(DBSOURCE, (err) => {
 	if (err) {
@@ -94,6 +115,21 @@ database.run(SQL_LOOKS_CREATE, (err) => {
 	}
 })
 
+database.run(SQL_LOOKS_ITEM_CREATE, (err) => {
+	if (err) {
+		// Possivelmente a tabela já foi criada
+	} else {
+		console.log('Tabela look_item criada com sucesso.')
+	}
+})
+
+database.run(SQL_MALAS_ITEM_CREATE, (err) => {
+	if (err) {
+		// Possivelmente a tabela já foi criada
+	} else {
+		console.log('Tabela mala_item criada com sucesso.')
+	}
+})
 
 
 

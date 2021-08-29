@@ -17,13 +17,13 @@ const malasRepository = {
 	},
 
 	ler: (id: number, callback: (mala?: Mala) => void) => {
-		const sql = 'SELECT * FROM malas WHERE idMala = ?'
+		const sql = 'SELECT * FROM malas WHERE MalaId = ?'
 		const params = [id]
 		database.get(sql, params, (_err, row) => callback(row))
 	},
 
 	atualizar: (id: number, mala: Mala, callback: (notFound: boolean) => void) => {
-		const sql = 'UPDATE malas SET titulo = ?, descricao = ? WHERE id = ?'
+		const sql = 'UPDATE malas SET tituloMala = ?, descricaoMala = ? WHERE id = ?'
 		const params = [mala.tituloMala, mala.descricaoMala, id]
 		database.run(sql, params, function(_err) {
 			callback(this.changes === 0)

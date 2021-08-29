@@ -4,8 +4,8 @@ import itensRepository from './itens-repository'
 
 const looksRepository = {
 	criar: (look: Look, callback: (id?: number) => void) => {
-		const sql = 'INSERT INTO looks ( descricaoLook, estacaoLook, ocasioesLook,) VALUES (?, ?, ?)'
-		const params = [look.descricaoLook, look.estacaoLook, look.ocasioesLook]
+		const sql = 'INSERT INTO looks ( descricaoLook, tagsLook) VALUES (?,?)'
+		const params = [look.descricaoLook, look.tagsLook]
 		database.run(sql, params, function(_err) {
 			callback(this?.lastID)
 		})
@@ -25,7 +25,7 @@ const looksRepository = {
 
 	atualizar: (id: number, look: Look, callback: (notFound: boolean) => void) => {
 		const sql = 'UPDATE looks SET ocasioesLook = ?, estacaoLook = ? WHERE idLook = ?'
-		const params = [look.estacaoLook, look.ocasioesLook, look.descricaoLook,id]
+		const params = [look.descricaoLook,id]
 		database.run(sql, params, function(_err) {
 			callback(this.changes === 0)
 		})

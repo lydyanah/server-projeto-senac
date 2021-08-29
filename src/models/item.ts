@@ -1,13 +1,20 @@
 type Item = {
 	id?: number
-	nome: string
 	categoria: string
 	subcategoria: string
-	descricao: string
 	tamanho: string
 	cor: string
 	marca: string
-	lookId: number
+	material: string
+	cuidados: string
+	preco: string
+	dataCompra: string
+	status: string
+	estacaoLook: string
+    ocasioesLook: string
+	notasItem: string
+    tagsItem: string
+	
 }
 
 export default Item

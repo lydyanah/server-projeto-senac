@@ -1,5 +1,7 @@
 import express from 'express'
+import Item from '../models/item'
 import Mala from '../models/mala'
+import itensRepository from '../repositories/itens-repository'
 import malasRepository from '../repositories/malas-repository'
 
 const malasRouter = express.Router()
@@ -53,5 +55,26 @@ malasRouter.delete('/malas/:id', (req, res) => {
         }
     })
 })
+
+malasRouter.post('/malas/:id/itens', (req, res) => {
+	const item: Item = {...req.body, ...{
+		malaId: req.params.id
+	}}
+	itensRepository.criar(item, (id) => {
+        if (id) {
+            res.status(201).location(`/itens/${id}`).send()
+        } else {
+            res.status(400).send()
+        }
+    })
+})
+
+malasRouter.get('/malas/:id/itens', (req, res) => {
+	const id: number = +req.params.id
+	itensRepository.lerTodosDaMala(id, (malas) => res.json(malas))
+})	
+
+
+
 
 export default malasRouter
