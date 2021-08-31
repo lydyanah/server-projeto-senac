@@ -6,19 +6,19 @@ const SQL_ITENS_CREATE = `
 	CREATE TABLE itens (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		categoria TEXT NOT NULL,
-		subcategoria TEXT NOT NULL, 
-		tamanho TEXT NOT NULL,
-		cor TEXT NOT NULL,
-		marca TEXT NOT NULL,
-		material TEXT NOT NULL,
-		cuidados TEXT NOT NULL,
-		preco TEXT NOT NULL,
-		dataCompra TEXT NOT NULL,
-		status TEXT NOT NULL,
-		estacaoLook TEXT NOT NULL,
-		ocasioesLook TEXT NOT NULL,
-		notasItem TEXT NOT NULL,
-		tagsItem TEXT NOT NULL
+		subcategoria TEXT NULL, 
+		tamanho TEXT NULL,
+		cor TEXT NULL,
+		marca TEXT NULL,
+		material TEXT NULL,
+		cuidados TEXT NULL,
+		preco TEXT NULL,
+		dataCompra TEXT NULL,
+		status TEXT NULL,
+		estacaoLook TEXT NULL,
+		ocasioesLook TEXT NULL,
+		notasItem TEXT NULL,
+		tagsItem TEXT NULL
 	)`
 
 const SQL_USUARIOS_CREATE = `
@@ -40,14 +40,14 @@ const SQL_MALAS_CREATE = `
 	CREATE TABLE malas (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		tituloMala TEXT NOT NULL,
-		descricaoMala TEXT NOT NULL
+		descricaoMala TEXT NULL
 	)`
 
 	const SQL_LOOKS_CREATE = `
 	CREATE TABLE looks (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		descricaoLook TEXT NOT NULL,
-		tagsLook TEXT NOT NULL
+		tagsLook TEXT NULL
 		
 		
 	)`
