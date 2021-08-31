@@ -1,13 +1,31 @@
+import Item from '../models/item'
 import Look from '../models/look'
 import database from './database'
 import itensRepository from './itens-repository'
 
 const looksRepository = {
 	criar: (look: Look, callback: (id?: number) => void) => {
+
+		const insereItens = (itens: Item[], lookId: number, callback: (id?: number) => void) => {
+			if (itens.length === 0) {
+				callback(lookId)
+			} else {
+				const item = itens.pop()
+				if (item?.id) {
+					const sql = 'INSERT INTO looks_item (lookId, itemId) VALUES (?,?)'
+					const params = [lookId, item.id]
+					database.run(sql, params, function (_err) {
+						insereItens(itens, lookId, callback)
+					})
+				}	
+			}
+		}
+
 		const sql = 'INSERT INTO looks ( descricaoLook, tagsLook) VALUES (?,?)'
 		const params = [look.descricaoLook, look.tagsLook]
-		database.run(sql, params, function(_err) {
-			callback(this?.lastID)
+		database.run(sql, params, function (_err) {
+			const lookId = this?.lastID
+			insereItens(look.item, lookId, callback)
 		})
 	},
 
