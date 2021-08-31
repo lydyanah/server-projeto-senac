@@ -1,14 +1,34 @@
+import Item from '../models/item'
 import Mala from '../models/mala'
 import database from './database'
+import itensRepository from './itens-repository'
 
 const malasRepository = {
 	criar: (mala: Mala, callback: (id?: number) => void) => {
-		const sql = 'INSERT INTO Malas (tituloMala, descricaoMala,) VALUES (?, ?)'
-		const params = [mala.tituloMala, mala.descricaoMala]
-		database.run(sql, params, function(_err) {
-			callback(this?.lastID)
+
+		const insereItens = (itens: Item[], malaId: number, callback: (id?: number) => void) => {
+			if (itens.length === 0) {
+				callback(malaId)
+			} else {
+				const item = itens.pop()
+				if (item?.id) {
+					const sql = 'INSERT INTO malas_item (malaId, itemId) VALUES (?,?)'
+					const params = [malaId, item.id]
+					database.run(sql, params, function (_err) {
+						insereItens(itens, malaId, callback)
+					})
+				}	
+			}
+		}
+
+		const sql = 'INSERT INTO malas ( tituloMala, descricaoMala ) VALUES (?,?)'
+		const params = [mala.tituloMala,mala.descricaoMala]
+		database.run(sql, params, function (_err) {
+			const lookId = this?.lastID
+			insereItens(mala.item, lookId, callback)
 		})
 	},
+	
 
 	lerTodos: (callback: (malas: Mala[]) => void) => {
 		const sql = 'SELECT * FROM malas'
@@ -31,12 +51,14 @@ const malasRepository = {
 	},
 
 	apagar: (id: number, callback: (notFound: boolean) => void) => {
-		const sql = 'DELETE FROM malas WHERE id = ?'
+		itensRepository.apagarDaMala(id, () => {
+		const sql = 'SELECT FROM malas WHERE id = ?'
 		const params = [id]
 		database.run(sql, params, function(_err) {
 			callback(this.changes === 0)
 		})
-	},
+	})
+},
 }
 
 export default malasRepository
